@@ -3,6 +3,19 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import Header from "@/stories/Header.vue";
+import { reactive } from "vue";
+
+interface Data {
+  accordion: boolean;
+}
+
+const data: Data = reactive({
+  accordion: true,
+});
+
+function accordionToggle(): void {
+  data.accordion = !data.accordion;
+}
 
 const router = useRouter();
 const isAuth = computed(() => {
@@ -17,6 +30,7 @@ onMounted(() => {
 
 <template>
   <main>
+    <Header />
     <div>
       <div>
         <p class="flex items-center gap-2 cursor-pointer">
@@ -144,9 +158,15 @@ onMounted(() => {
               <div class="info_item border-b border-[#F0F1F5]">
                 <div>
                   <h3>Card</h3>
-                  <p>3283 2832 3283 0355</p>
+                  <p :class="{ text_block: data.accordion }">
+                    3283 2832 3283 0355
+                  </p>
+                  <p
+                    class="w-[262px] h-[26px] rounded-3xl bg-[#F9FAFB] hidden"
+                    :class="{ text_none: data.accordion }"
+                  ></p>
                 </div>
-                <div>
+                <div :class="{ text_block: data.accordion }">
                   <img
                     src="../assets/icons/copy_icon.svg"
                     alt="copy"
@@ -156,9 +176,13 @@ onMounted(() => {
               <div class="info_item">
                 <div>
                   <h3>Holder</h3>
-                  <p>SEGREY HSY</p>
+                  <p :class="{ text_block: data.accordion }">SEGREY HSY</p>
+                  <p
+                    class="w-[262px] h-[26px] rounded-3xl bg-[#F9FAFB] hidden"
+                    :class="{ text_none: data.accordion }"
+                  ></p>
                 </div>
-                <div>
+                <div :class="{ text_block: data.accordion }">
                   <img
                     src="../assets/icons/copy_icon.svg"
                     alt="copy"
@@ -170,9 +194,13 @@ onMounted(() => {
               <div class="info_item border-b border-[#F0F1F5]">
                 <div>
                   <h3>Valid till</h3>
-                  <p>11 / 2023</p>
+                  <p :class="{ text_block: data.accordion }">11 / 2023</p>
+                  <p
+                    class="w-[81px] h-[26px] rounded-3xl bg-[#F9FAFB] hidden"
+                    :class="{ text_none: data.accordion }"
+                  ></p>
                 </div>
-                <div>
+                <div :class="{ text_block: data.accordion }">
                   <img
                     src="../assets/icons/copy_icon.svg"
                     alt="copy"
@@ -182,9 +210,13 @@ onMounted(() => {
               <div class="info_item">
                 <div>
                   <h3>CVC</h3>
-                  <p>231</p>
+                  <p :class="{ text_block: data.accordion }">231</p>
+                  <p
+                    class="w-[61px] h-[26px] rounded-3xl bg-[#F9FAFB] hidden"
+                    :class="{ text_none: data.accordion }"
+                  ></p>
                 </div>
-                <div>
+                <div :class="{ text_block: data.accordion }">
                   <img
                     src="../assets/icons/copy_icon.svg"
                     alt="copy"
@@ -193,31 +225,47 @@ onMounted(() => {
               </div>
             </div>
             <div class="rounded-[12px] border border-[#F0F1F5]">
-              <div class="info_item">
-                <div class="max-w-[262px]">
-                  <h3>Billing Address</h3>
-                  <p>1233 W Main Street, Riverhead, NY, 12031, US</p>
+              <div class="info_item flex-col">
+                <div class="flex items-center">
+                  <div class="max-w-[262px]">
+                    <h3>Billing Address</h3>
+                    <p class="mb-[23px]" :class="{ text_block: data.accordion }">
+                      1233 W Main Street, Riverhead, NY, 12031, US
+                    </p>
+                    <p
+                      class="w-[262px] h-[51px] rounded-3xl bg-[#F9FAFB] hidden mb-[23px]"
+                      :class="{ text_none: data.accordion }"
+                    ></p>
+                  </div>
+                  <div :class="{ text_block: data.accordion }">
+                    <img
+                      src="../assets/icons/copy_icon.svg"
+                      alt="copy"
+                    />
+                  </div>
                 </div>
                 <div>
-                  <img
-                    src="../assets/icons/copy_icon.svg"
-                    alt="copy"
-                  />
-                </div>
-              </div>
-              <div>
-                <button
-                  class="max-w-[287px] m-auto bg-[#1A1E26] flex py-[10px] px-[91.8px] rounded-xl items-center"
-                >
-                  <img
-                    src="../assets/icons/btn_eye_close.svg"
-                    alt="Eye"
-                  />
-                  <span
-                    class="text-[#FFFFFF] leading-[22.4px] text-[14px] font-[600] ml-2"
-                    >Hide Details</span
+                  <button
+                    @click="accordionToggle"
+                    class="max-w-[287px] m-auto bg-[#1A1E26] flex py-[10px] px-[91.8px] rounded-xl items-center"
                   >
-                </button>
+                    <img
+                      :class="{ text_block: data.accordion }"
+                      src="../assets/icons/btn_eye_close.svg"
+                      alt="Eye"
+                    />
+                    <img
+                      class="hidden"
+                      :class="{ text_none: data.accordion }"
+                      src="../assets/icons/Eye.svg"
+                      alt="Eye"
+                    />
+                    <span
+                      class="text-[#FFFFFF] leading-[22.4px] text-[14px] font-[600] ml-2"
+                      >Hide Details</span
+                    >
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -311,10 +359,80 @@ onMounted(() => {
                     >
                       - $ 211.41
                     </h3>
-                    <img class="w-4"
+                    <img
+                      class="w-4"
                       src="../assets/icons/minus_wallet.svg"
                       alt="err"
                     />
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="grid gap-3">
+              <h5
+                class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+              >
+                3 January
+              </h5>
+              <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
+                <li class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div>
+                      <img
+                        src="../assets/icons/icon_transaction3.svg"
+                        alt="icon"
+                      />
+                    </div>
+                    <div>
+                      <h3
+                        class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                      >
+                        Deposit from USDT Wallet
+                      </h3>
+                      <p
+                        class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                      >
+                        12:21 AM
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <h3
+                      class="font-[700] text-[#19A451] text-[16px] leading-[25.6px]"
+                    >
+                      + $ 100.79
+                    </h3>
+                  </div>
+                </li>
+              </ul>
+              <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
+                <li class="flex justify-between">
+                  <div class="flex gap-3">
+                    <div>
+                      <img
+                        src="../assets/icons/icon_transaction4.svg"
+                        alt="icon"
+                      />
+                    </div>
+                    <div>
+                      <h3
+                        class="font-[600] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                      >
+                        GMPays
+                      </h3>
+                      <p
+                        class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                      >
+                        12:21 AM
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <h3
+                      class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                    >
+                      - $ 6 755.79
+                    </h3>
                   </div>
                 </li>
               </ul>
@@ -388,6 +506,7 @@ onMounted(() => {
   line-height: 22.4px;
   color: #55637f;
   font-weight: 500;
+  margin-bottom: 8px;
 }
 .info_item div p {
   font-size: 16px;
@@ -399,5 +518,12 @@ onMounted(() => {
   cursor: pointer;
   width: 16px !important;
   height: 16px !important;
+}
+
+.text_block {
+  display: none;
+}
+.text_none {
+  display: block !important;
 }
 </style>
