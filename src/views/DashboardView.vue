@@ -4,6 +4,7 @@ import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import Header from "@/stories/Header.vue";
 import { reactive } from "vue";
+import Page from "@/stories/Page.vue";
 
 interface Data {
   accordion: boolean;
@@ -162,7 +163,7 @@ onMounted(() => {
                     3283 2832 3283 0355
                   </p>
                   <p
-                    class="w-[262px] h-[26px] rounded-3xl bg-[#F9FAFB] hidden"
+                    class="w-[262px] h-[25.60px] rounded-3xl bg-[#F9FAFB] hidden"
                     :class="{ text_none: data.accordion }"
                   ></p>
                 </div>
@@ -178,7 +179,7 @@ onMounted(() => {
                   <h3>Holder</h3>
                   <p :class="{ text_block: data.accordion }">SEGREY HSY</p>
                   <p
-                    class="w-[262px] h-[26px] rounded-3xl bg-[#F9FAFB] hidden"
+                    class="w-[262px] h-[25.6px] rounded-3xl bg-[#F9FAFB] hidden"
                     :class="{ text_none: data.accordion }"
                   ></p>
                 </div>
@@ -196,7 +197,7 @@ onMounted(() => {
                   <h3>Valid till</h3>
                   <p :class="{ text_block: data.accordion }">11 / 2023</p>
                   <p
-                    class="w-[81px] h-[26px] rounded-3xl bg-[#F9FAFB] hidden"
+                    class="w-[81px] h-[25.6px] rounded-3xl bg-[#F9FAFB] hidden"
                     :class="{ text_none: data.accordion }"
                   ></p>
                 </div>
@@ -212,7 +213,7 @@ onMounted(() => {
                   <h3>CVC</h3>
                   <p :class="{ text_block: data.accordion }">231</p>
                   <p
-                    class="w-[61px] h-[26px] rounded-3xl bg-[#F9FAFB] hidden"
+                    class="w-[61px] h-[25.6px] rounded-3xl bg-[#F9FAFB] hidden"
                     :class="{ text_none: data.accordion }"
                   ></p>
                 </div>
@@ -294,7 +295,7 @@ onMounted(() => {
                 </li>
               </ul>
             </div>
-            <div class="grid gap-3">
+            <div class="grid gap-3 mb-5">
               <h5
                 class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
               >
@@ -368,7 +369,7 @@ onMounted(() => {
                 </li>
               </ul>
             </div>
-            <div class="grid gap-3">
+            <div class="grid gap-3 mb-5">
               <h5
                 class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
               >
