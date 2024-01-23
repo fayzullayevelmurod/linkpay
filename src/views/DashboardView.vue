@@ -1,10 +1,20 @@
 <script setup lang="ts">
-import HelloWorld from "@/components/HelloWorld.vue";
 import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import Header from "@/stories/Header.vue";
 import { reactive } from "vue";
-import Page from "@/stories/Page.vue";
+import Tabs from "@/components/Tabs.vue";
+import { ref } from "vue";
+
+const tabs = [
+  { name: "all", label: "All Transactions" },
+  { name: "dep", label: "Deposits" },
+  { name: "spen", label: "Spendings" },
+];
+const selectedTab = ref("all");
+
+const changeTab = (tabName) => {
+  selectedTab.value = tabName;
+};
 
 interface Data {
   accordion: boolean;
@@ -31,7 +41,6 @@ onMounted(() => {
 
 <template>
   <main>
-    <Header />
     <div>
       <div>
         <p class="flex items-center gap-2 cursor-pointer">
@@ -230,7 +239,10 @@ onMounted(() => {
                 <div class="flex items-center">
                   <div class="max-w-[262px]">
                     <h3>Billing Address</h3>
-                    <p class="mb-[23px]" :class="{ text_block: data.accordion }">
+                    <p
+                      class="mb-[23px]"
+                      :class="{ text_block: data.accordion }"
+                    >
                       1233 W Main Street, Riverhead, NY, 12031, US
                     </p>
                     <p
@@ -277,7 +289,7 @@ onMounted(() => {
               Transactions
             </h1>
             <div>
-              <ul class="flex items-center gap-6 mb-5">
+              <!-- <ul class="flex items-center gap-6 mb-5">
                 <li
                   class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
                 >
@@ -293,151 +305,233 @@ onMounted(() => {
                 >
                   Spendings
                 </li>
-              </ul>
+              </ul> -->
             </div>
-            <div class="grid gap-3 mb-5">
-              <h5
-                class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-              >
-                3 January
-              </h5>
-              <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
-                <li class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <div>
-                      <img
-                        src="../assets/icons/icon_transaction.svg"
-                        alt="icon"
-                      />
-                    </div>
-                    <div>
-                      <h3
-                        class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
-                      >
-                        GMPays
-                      </h3>
-                      <p
-                        class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-                      >
-                        12:21 AM
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-center">
-                    <h3
-                      class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
-                    >
-                      - $ 6 755.79
-                    </h3>
-                  </div>
-                </li>
-              </ul>
-              <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
-                <li class="flex justify-between">
-                  <div class="flex gap-3">
-                    <div>
-                      <img
-                        src="../assets/icons/icon_transaction2.svg"
-                        alt="icon"
-                      />
-                    </div>
-                    <div>
-                      <h3
-                        class="font-[600] text-[#1A1E26] text-[16px] leading-[25.6px]"
-                      >
-                        Booking
-                      </h3>
-                      <p
-                        class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-                      >
-                        12:21 AM
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-center">
-                    <h3
-                      class="font-[700] text-[#FF4337] text-[16px] leading-[25.6px]"
-                    >
-                      - $ 211.41
-                    </h3>
-                    <img
-                      class="w-4"
-                      src="../assets/icons/minus_wallet.svg"
-                      alt="err"
-                    />
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="grid gap-3 mb-5">
-              <h5
-                class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-              >
-                3 January
-              </h5>
-              <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
-                <li class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <div>
-                      <img
-                        src="../assets/icons/icon_transaction3.svg"
-                        alt="icon"
-                      />
-                    </div>
-                    <div>
-                      <h3
-                        class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
-                      >
-                        Deposit from USDT Wallet
-                      </h3>
-                      <p
-                        class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-                      >
-                        12:21 AM
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-center">
-                    <h3
-                      class="font-[700] text-[#19A451] text-[16px] leading-[25.6px]"
-                    >
-                      + $ 100.79
-                    </h3>
-                  </div>
-                </li>
-              </ul>
-              <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
-                <li class="flex justify-between">
-                  <div class="flex gap-3">
-                    <div>
-                      <img
-                        src="../assets/icons/icon_transaction4.svg"
-                        alt="icon"
-                      />
-                    </div>
-                    <div>
-                      <h3
-                        class="font-[600] text-[#1A1E26] text-[16px] leading-[25.6px]"
-                      >
-                        GMPays
-                      </h3>
-                      <p
-                        class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-                      >
-                        12:21 AM
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-center">
-                    <h3
-                      class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
-                    >
-                      - $ 6 755.79
-                    </h3>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <Tabs
+              :names="tabs"
+              :selectedTab="selectedTab"
+              @changeTab="changeTab"
+            >
+              <div v-if="selectedTab === 'all'">
+                <div class="grid gap-3 mb-5">
+                  <h5
+                    class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                  >
+                    3 January
+                  </h5>
+                  <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
+                    <li class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div>
+                          <img
+                            src="../assets/icons/icon_transaction.svg"
+                            alt="icon"
+                          />
+                        </div>
+                        <div>
+                          <h3
+                            class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                          >
+                            GMPays
+                          </h3>
+                          <p
+                            class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                          >
+                            12:21 AM
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <h3
+                          class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                        >
+                          - $ 6 755.79
+                        </h3>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
+                    <li class="flex justify-between">
+                      <div class="flex gap-3">
+                        <div>
+                          <img
+                            src="../assets/icons/icon_transaction2.svg"
+                            alt="icon"
+                          />
+                        </div>
+                        <div>
+                          <h3
+                            class="font-[600] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                          >
+                            Booking
+                          </h3>
+                          <p
+                            class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                          >
+                            12:21 AM
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <h3
+                          class="font-[700] text-[#FF4337] text-[16px] leading-[25.6px]"
+                        >
+                          - $ 211.41
+                        </h3>
+                        <img
+                          class="w-4"
+                          src="../assets/icons/minus_wallet.svg"
+                          alt="err"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="grid gap-3 mb-5">
+                  <h5
+                    class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                  >
+                    2 January
+                  </h5>
+                  <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
+                    <li class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div>
+                          <img
+                            src="../assets/icons/icon_transaction3.svg"
+                            alt="icon"
+                          />
+                        </div>
+                        <div>
+                          <h3
+                            class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                          >
+                            Deposit from USDT Wallet
+                          </h3>
+                          <p
+                            class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                          >
+                            12:21 AM
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <h3
+                          class="font-[700] text-[#19A451] text-[16px] leading-[25.6px]"
+                        >
+                          + $ 100.79
+                        </h3>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
+                    <li class="flex justify-between">
+                      <div class="flex gap-3">
+                        <div>
+                          <img
+                            src="../assets/icons/icon_transaction4.svg"
+                            alt="icon"
+                          />
+                        </div>
+                        <div>
+                          <h3
+                            class="font-[600] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                          >
+                            GMPays
+                          </h3>
+                          <p
+                            class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                          >
+                            12:21 AM
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <h3
+                          class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                        >
+                          - $ 6 755.79
+                        </h3>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div v-if="selectedTab === 'dep'">
+                <div class="grid gap-3 mb-5">
+                  <h5
+                    class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                  >
+                    2 January
+                  </h5>
+                  <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
+                    <li class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div>
+                          <img
+                            src="../assets/icons/icon_transaction3.svg"
+                            alt="icon"
+                          />
+                        </div>
+                        <div>
+                          <h3
+                            class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                          >
+                            Deposit from USDT Wallet
+                          </h3>
+                          <p
+                            class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                          >
+                            12:21 AM
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <h3
+                          class="font-[700] text-[#19A451] text-[16px] leading-[25.6px]"
+                        >
+                          + $ 100.79
+                        </h3>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="border border-[#F0F1F5] rounded-[12px] p-5">
+                    <li class="flex justify-between">
+                      <div class="flex gap-3">
+                        <div>
+                          <img
+                            src="../assets/icons/icon_transaction4.svg"
+                            alt="icon"
+                          />
+                        </div>
+                        <div>
+                          <h3
+                            class="font-[600] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                          >
+                            GMPays
+                          </h3>
+                          <p
+                            class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
+                          >
+                            12:21 AM
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center">
+                        <h3
+                          class="font-[700] text-[#1A1E26] text-[16px] leading-[25.6px]"
+                        >
+                          - $ 6 755.79
+                        </h3>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div v-if="selectedTab === 'spen'">
+                nuxt Lorem ipsum dolor sit amet.
+              </div>
+            </Tabs>
           </div>
         </div>
       </div>
