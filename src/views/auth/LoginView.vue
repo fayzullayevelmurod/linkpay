@@ -9,7 +9,7 @@ const onLogin = () => {
 
 <template>
   <div>
-    <button @click="onLogin">Login</button>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" @click="onLogin">Login</button>
   </div>
 </template>
 
