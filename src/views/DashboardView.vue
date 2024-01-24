@@ -288,25 +288,6 @@ onMounted(() => {
             >
               Transactions
             </h1>
-            <div>
-              <!-- <ul class="flex items-center gap-6 mb-5">
-                <li
-                  class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-                >
-                  All Transactions
-                </li>
-                <li
-                  class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-                >
-                  Deposits
-                </li>
-                <li
-                  class="font-[500] text-[14px] text-[#55637F] leading-[22.4px]"
-                >
-                  Spendings
-                </li>
-              </ul> -->
-            </div>
             <Tabs
               :names="tabs"
               :selectedTab="selectedTab"
